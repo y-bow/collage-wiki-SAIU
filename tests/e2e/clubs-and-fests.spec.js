@@ -20,7 +20,7 @@ test.describe('/clubs directory', () => {
 
   test('Archive mention links to the leadership archive, not the event archive', async ({page}) => {
     await page.goto('clubs');
-    await expect(page.locator('main').getByRole('link', {name: 'Archive', exact: true})).toHaveAttribute(
+    await expect(page.getByRole('link', {name: 'Archive', exact: true})).toHaveAttribute(
       'href',
       /\/docs\/archive$/
     );
@@ -47,12 +47,11 @@ test.describe('Club contact pages', () => {
 
   test("FOSS Club's contact page shows its real email/Instagram/LinkedIn", async ({page}) => {
     await page.goto('docs/clubs/foss-club/contact');
-    const article = page.locator('article');
-    await expect(article.getByRole('link', {name: 'fossclub@saiuniversity.edu.in'})).toHaveAttribute(
+    await expect(page.getByRole('link', {name: 'fossclub@saiuniversity.edu.in'})).toHaveAttribute(
       'href',
       'mailto:fossclub@saiuniversity.edu.in'
     );
-    await expect(article.getByRole('link', {name: '@foss.saiu'})).toHaveAttribute(
+    await expect(page.getByRole('link', {name: '@foss.saiu'})).toHaveAttribute(
       'href',
       'https://www.instagram.com/foss.saiu'
     );

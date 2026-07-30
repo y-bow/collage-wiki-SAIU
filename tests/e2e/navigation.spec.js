@@ -6,8 +6,6 @@ const NAVBAR_LINKS = [
   {label: 'Clubs', path: '/clubs'},
   {label: 'Fests', path: '/fests'},
   {label: 'Docs', path: '/docs/intro'},
-  {label: 'Resources', path: '/docs/category/resources'},
-  {label: 'Archive', path: '/docs/resources/archives'},
   {label: 'Events', path: '/events'},
   {label: 'Blog', path: '/student-voices'},
 ];
@@ -17,14 +15,12 @@ const FOOTER_WIKI_LINKS = [
   {label: 'Clubs', path: '/clubs'},
   {label: 'Fests', path: '/fests'},
   {label: 'Docs', path: '/docs/intro'},
-  {label: 'Resources', path: '/docs/category/resources'},
-  {label: 'Archive', path: '/docs/resources/archives'},
   {label: 'Events', path: '/events'},
   {label: 'Blog', path: '/student-voices'},
 ];
 
 test.describe('navbar', () => {
-  test('shows all eight navbar items in order', async ({page}) => {
+  test('shows all six items in order', async ({page}) => {
     const errors = trackConsoleErrors(page);
     await page.goto('');
     const items = (await page.locator('.navbar__item.navbar__link').allTextContents())

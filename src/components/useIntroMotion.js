@@ -39,26 +39,10 @@ import { useState, useEffect, useMemo, useRef, useCallback } from 'react';
 export function useIntroMotion({ scrollThreshold = 24, playOnVisible = false } = {}) {
   const [isIntroPlaying, setIsIntroPlaying] = useState(false);
   const [isClickPlaying, setIsClickPlaying] = useState(false);
-  const [isOffScreen, setIsOffScreen] = useState(true);
   // Reduced-motion is read once on mount and gates click too, so it can't
   // sneak animation past someone who asked for none.
   const allowsMotion = useRef(true);
   const containerRef = useRef(null);
-
-  // Off-screen pause: any hero that scrolls out of view stops animating.
-  // This prevents looping/playing heroes from wasting resources when the
-  // reader can't see them (worst on the directory page with many heroes).
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    const el = containerRef.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => setIsOffScreen(!entry.isIntersecting),
-      {threshold: 0}
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
 
   useEffect(() => {
     // SSR guard — Docusaurus prerenders these pages.
@@ -145,20 +129,19 @@ export function useIntroMotion({ scrollThreshold = 24, playOnVisible = false } =
 
   // Spread onto the hero's outer element. Kept the name `hoverProps` even
   // though it's click-driven now, so every hero's existing
-  // `<div {...hoverProps}>` keeps working unchanged. `ref` is always
-  // attached (needed for off-screen pause); `playOnVisible` heroes also
-  // use it for the entry-intro delay. Every hero now needs its own ref
-  // because the IntersectionObserver needs a DOM node to observe.
+  // `<div {...hoverProps}>` keeps working unchanged. `ref` rides along the
+  // same spread when `playOnVisible` is on, so a `playOnVisible` hero needs
+  // no JSX change beyond passing that option to the hook.
   const hoverProps = useMemo(
     () => ({
       onClick: toggleClickPlaying,
-      ref: containerRef,
+      ...(playOnVisible ? {ref: containerRef} : {}),
     }),
-    [toggleClickPlaying]
+    [toggleClickPlaying, playOnVisible]
   );
 
   return {
-    isPlaying: !isOffScreen && (isIntroPlaying || isClickPlaying),
+    isPlaying: isIntroPlaying || isClickPlaying,
     // Each hero remounts its SVG on this (via `key={isReplaying ? ... }`) so
     // Framer Motion restarts cleanly from the first keyframe instead of
     // animating from wherever it happened to be.

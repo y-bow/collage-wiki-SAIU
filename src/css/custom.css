@@ -553,60 +553,6 @@
 }
 
 /* =====================================================================
-   Accent unified-mode toggle — sits between the contact bar and the
-   FOSS credit in the footer.
-   ===================================================================== */
-.footer-accent-toggle {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.6rem;
-  padding: 0 0 0.75rem;
-  background: var(--ifm-footer-background-color);
-  font-size: 0.8rem;
-}
-.footer-accent-toggle__label {
-  color: var(--ifm-footer-color, #ebedf0);
-  opacity: 0.6;
-  user-select: none;
-}
-.footer-accent-toggle__button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  line-height: 1;
-}
-.footer-accent-toggle__track {
-  display: block;
-  width: 32px;
-  height: 18px;
-  border-radius: 9px;
-  background: var(--ifm-footer-color, #666);
-  opacity: 0.4;
-  position: relative;
-  transition: background 0.2s ease, opacity 0.2s ease;
-}
-.footer-accent-toggle__track--unified {
-  background: var(--ifm-color-primary);
-  opacity: 0.8;
-}
-.footer-accent-toggle__thumb {
-  display: block;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: #fff;
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  transition: left 0.2s ease;
-}
-.footer-accent-toggle__track--unified .footer-accent-toggle__thumb {
-  left: 16px;
-}
-
-/* =====================================================================
    ImageCarousel — for blog/event posts with more than one photo
    (src/components/ImageCarousel.jsx). See CONTRIBUTING.md.
    ===================================================================== */

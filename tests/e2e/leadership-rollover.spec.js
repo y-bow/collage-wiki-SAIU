@@ -46,7 +46,7 @@ test.describe('Current Board / Organisation Committee sections', () => {
 
   test('/clubs "Archive" mention navigates to the leadership archive', async ({page}) => {
     await page.goto('clubs');
-    await page.locator('main').getByRole('link', {name: 'Archive', exact: true}).click();
+    await page.getByRole('link', {name: 'Archive', exact: true}).click();
     await page.waitForLoadState('networkidle');
     await expect(page).toHaveURL(/\/docs\/archive$/);
   });

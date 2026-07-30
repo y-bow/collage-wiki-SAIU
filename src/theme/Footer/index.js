@@ -1,11 +1,10 @@
 import React, {useState} from 'react';
 import Footer from '@theme-original/Footer';
-import {Mail, Bug, ExternalLink} from 'lucide-react';
+import {Mail, Bug} from 'lucide-react';
 import ChromeDinoGame from 'react-chrome-dino';
 import 'react-chrome-dino/build/index.css';
 import {useAccentMode} from '../../components/useClubAccent';
 import {CLUB_CONTACTS} from '../../data/clubContacts';
-import AccentToggle from '../../components/AccentToggle';
 
 // Lucide is a generic icon set and doesn't include brand logos — GitHub,
 // LinkedIn, and Instagram are hand-embedded SVG paths instead, same
@@ -37,24 +36,27 @@ function InstagramIcon(props) {
   );
 }
 
-const SAI_UNIVERSITY_LINKEDIN_URL = 'https://www.linkedin.com/school/sai-university-chennai/';
-const SAI_UNIVERSITY_INSTAGRAM_URL = 'https://www.instagram.com/saiuniversity/';
-const SAI_UNIVERSITY_EMAIL = 'admissions@saiuniversity.edu.in';
+// PLACEHOLDERS — replace with the real destinations before this ships.
+// Grep "PLACEHOLDER" to find every one of these in the codebase.
+const PLACEHOLDER_LINKEDIN_URL = '#'; // Sai University's official LinkedIn page
+const PLACEHOLDER_INSTAGRAM_URL = '#'; // Sai University's official Instagram
+const PLACEHOLDER_EMAIL = 'contact@example.com'; // real contact address
 
 const WIKI_REPO_URL = 'https://github.com/ChargingTrex/collage-wiki-SAIU';
-const FOSS_WIKI_URL = 'https://y-bow.github.io/saiufosswiki/';
 
 const CONTACT_LINKS = [
-  {Icon: LinkedinIcon, href: SAI_UNIVERSITY_LINKEDIN_URL, label: 'Sai University on LinkedIn'},
-  {Icon: InstagramIcon, href: SAI_UNIVERSITY_INSTAGRAM_URL, label: 'Sai University on Instagram'},
-  {Icon: Mail, href: `mailto:${SAI_UNIVERSITY_EMAIL}`, label: 'Email us'},
+  {Icon: LinkedinIcon, href: PLACEHOLDER_LINKEDIN_URL, label: 'Sai University on LinkedIn'},
+  {Icon: InstagramIcon, href: PLACEHOLDER_INSTAGRAM_URL, label: 'Sai University on Instagram'},
+  {Icon: Mail, href: `mailto:${PLACEHOLDER_EMAIL}`, label: 'Email us'},
   {Icon: GithubIcon, href: WIKI_REPO_URL, label: 'Wiki source on GitHub'},
-  {Icon: ExternalLink, href: FOSS_WIKI_URL, label: 'SaiU FOSS Club Wiki'},
   {Icon: Bug, href: `${WIKI_REPO_URL}/issues`, label: 'Report an issue with this wiki'},
 ];
 
-// FOSS Club contact info reused from src/data/clubContacts.js so updating
-// that one entry keeps this credit in sync too.
+// FOSS Club is the one club with real, verified contact info on file (see
+// src/data/clubContacts.js's own header comment) — reused here rather than
+// duplicated, so updating that one entry keeps this credit in sync too.
+// Same pattern as the reference wiki this project borrows the footer style
+// from (github.com/y-bow/saiufosswiki), which credits itself the same way.
 const FOSS_CONTACT = CLUB_CONTACTS['foss-club'];
 
 function FossClubCredit() {
@@ -166,7 +168,6 @@ export default function FooterWrapper(props) {
           </a>
         ))}
       </div>
-      <AccentToggle />
       <FossClubCredit />
       <DinoEasterEgg />
     </>
